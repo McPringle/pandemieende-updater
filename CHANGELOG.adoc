@@ -1,0 +1,26 @@
+= Pandemieende Updater Changelog
+:uri-project: https://github.com/McPringle/pandemieende-updater
+:icons: font
+:star: icon:star[role=red]
+ifndef::icons[]
+:star: &#9733;
+endif::[]
+
+{uri-project}[Pandemieende Updater] is a helpful little brownie that automates the update process for the https://pandemieende.ch/[Pandemieende Schweiz und Liechtenstein] website. The Pandemieende Updater project is {uri-project}[hosted on GitHub].
+
+This document provides a high-level view of the changes introduced in *Pandemieende Updater* by release.
+For a detailed view of what has changed, refer to the {uri-project}/commits/main[commit history] on GitHub.
+
+// tag::compact[]
+
+== 1.0.0-SNAPSHOT (2021-03-13) - https://github.com/McPringle[Marcus Fihlon]
+
+Bugfixes::
+
+Improvements::
+
+Enhancements::
+
+Maintenance::
+
+// end::compact[]

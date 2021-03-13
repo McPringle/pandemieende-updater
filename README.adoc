@@ -1,0 +1,108 @@
+= Pandemieende Updater
+Marcus Fihlon <https://github.com/McPringle/[@McPringle]>
+// settings:
+:idprefix:
+:idseparator: -
+:source-language: java
+:language: {source-language}
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:status:
+:outfilesuffix: .adoc
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+// URIs:
+:uri-org: https://github.com/McPringle
+:uri-project: {uri-org}/pandemieende-updater
+:uri-issues: {uri-project}/issues
+:uri-contributors: {uri-project}/graphs/contributors
+:uri-rel-file-base: link:
+:uri-rel-tree-base: link:
+ifdef::env-site,env-yard[]
+:uri-rel-file-base: {uri-project}/blob/main/
+:uri-rel-tree-base: {uri-project}/tree/main/
+endif::[]
+:uri-license: {uri-rel-file-base}LICENSE
+:uri-download: {uri-project}/archive/main.zip
+:uri-changelog: {uri-rel-file-base}CHANGELOG.adoc
+:uri-contribute: {uri-rel-file-base}CONTRIBUTING.adoc
+
+*{uri-project}[Pandemieende Updater]* is a helpful little brownie that automates the update process for the https://pandemieende.ch/[Pandemieende Schweiz und Liechtenstein] website. The *Pandemieende Updater* project is {uri-project}[hosted on GitHub].
+
+== Requirements
+
+*Pandemieende Updater* works on all operating systems with support for Java 15+.
+
+== Installation
+
+There is nothing to install. Just {uri-download}[download] and unzip the sources or clone the repository:
+
+ $ git clone https://github.com/McPringle/pandemieende-updater.git
+
+== Build
+
+Before using *Pandemieende Updater*, you must build the artifact from the sources. Gradle will do this for you:
+
+ $ ./gradlew assemble
+
+== Usage
+
+To run *Pandemieende Updater*, you can use the wrapper scripts for UN*X and Windows based systems:
+
+ $ ./updater
+
+If you run *Pandemieende Updater* without any command line arguments, you should get usage instructions of how to use *Pandemieende Updater*.
+
+== Contributing
+
+New contributors are always welcome!
+If you discover errors or omissions in the source code, documentation, or website content, please don't hesitate to submit an issue or open a pull request with a fix.
+
+Here are some ways *you* can contribute:
+
+* by using prerelease (alpha, beta or preview) versions
+* by reporting bugs
+* by suggesting new features
+* by writing or editing documentation
+* by writing code with tests -- _No patch is too small._
+** fix typos
+** add comments
+** clean up inconsistent whitespace
+** write tests!
+* by refactoring code
+* by fixing {uri-issues}[issues]
+* by reviewing patches
+
+The {uri-contribute}[Contributing] guide provides information on how to create, style, and submit issues, feature requests, code, and documentation to the *Pandemieende Updater* project.
+
+== Copyright and License
+
+MIT License
+
+Copyright (C) 2021 Marcus Fihlon and the individual contributors to
+*Pandemieende Updater*.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+== Authors
+
+*Pandemieende Updater* is led by https://github.com/McPringle[Marcus Fihlon] and has received contributions from {uri-contributors}[many individuals] in our awesome community.
+The project was initiated in 2021 by https://github.com/McPringle[Marcus Fihlon].
+
+ifndef::env-site[]
+== Changelog
+
+ifeval::[{safe-mode-level} < 20]
+include::CHANGELOG.adoc[tag=compact,leveloffset=+1]
+endif::[]
+
+Refer to the {uri-changelog}[CHANGELOG] for a complete list of changes in older releases.
+endif::[]
