@@ -80,7 +80,7 @@ set CLASSPATH=%APP_HOME%\build\libs\pandemieende-updater.jar
 
 
 @rem Execute Pandemieende Updater
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PANDEMIEENDE_UPDATER_OPTS% -classpath "%CLASSPATH%" -ea --enable-preview ch.pandemieende.updater.Main %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PANDEMIEENDE_UPDATER_OPTS% -classpath "%CLASSPATH%" -ea ch.pandemieende.updater.Main %*
 
 :end
 @rem End local scope for the variables with windows NT shell
