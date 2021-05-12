@@ -27,7 +27,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
-    id 'com.github.spotbugs' version '4.7.1'
+    id 'com.github.spotbugs' version '4.2.3'
     id 'pmd'
     id 'checkstyle'
 }
@@ -48,7 +48,7 @@ configurations {
 }
 
 dependencies {
-    compileOnly 'com.github.spotbugs:spotbugs-annotations:4.2.0'
+    compileOnly 'com.github.spotbugs:spotbugs-annotations:4.2.3'
     implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'commons-cli:commons-cli:1.4'
