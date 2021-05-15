@@ -53,9 +53,9 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'commons-cli:commons-cli:1.4'
     testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.2.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.1'
-    testImplementation 'org.junit.platform:junit-platform-engine:1.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.2'
+    testImplementation 'org.junit.platform:junit-platform-engine:1.7.2'
 }
 
 test.classpath += configurations.developmentOnly
