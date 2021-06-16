@@ -54,7 +54,7 @@ public final class Main {
                 printHelp(options);
             }
             if (cmd.hasOption("v")) {
-                System.out.printf("CSS Slack Bot %s%n%s%n", VERSION, LICENSE); //NOSONAR
+                System.out.printf("Pandemieende Updater %s%n%s%n", VERSION, LICENSE); //NOSONAR
             }
         } catch (final ParseException e) {
             LOGGER.error(e.getMessage());
