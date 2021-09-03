@@ -67,12 +67,6 @@ tasks.withType(JavaCompile) {
     options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
 }
 
-task installGitHooks(type: Copy) {
-    from new File(rootProject.rootDir, 'config/git/pre-push')
-    into { new File(rootProject.rootDir, '.git/hooks') }
-    fileMode 0755
-}
-
 shadowJar {
     mergeServiceFiles()
     archiveBaseName.set('pandemieende-updater')
@@ -122,5 +116,4 @@ tasks.named('wrapper') {
 }
 
 assemble.dependsOn check
-check.dependsOn installGitHooks
 jar.dependsOn createProperties
