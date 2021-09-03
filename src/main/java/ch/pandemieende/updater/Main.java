@@ -26,9 +26,6 @@
 package ch.pandemieende.updater;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -36,6 +33,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public final class Main {
 
@@ -48,7 +48,7 @@ public final class Main {
         try {
             final var cmd = parseCommandLine(options, args);
             if (cmd.hasOption("u")) {
-                System.out.println("Do something useful...");
+                new Updater(cmd.getOptionValue("u")).doUpdate();
             }
             if (cmd.hasOption("h") || cmd.getOptions().length <= options.getRequiredOptions().size()) {
                 printHelp(options);
@@ -59,6 +59,8 @@ public final class Main {
         } catch (final ParseException e) {
             LOGGER.error(e.getMessage());
             printHelp(options);
+        } catch (final Exception e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -80,7 +82,8 @@ public final class Main {
     private static Options buildOptions() {
         final var options = new Options();
         options.addOption("h", "help", false, "print this message");
-        options.addOption("u", "update", false, "update the pandemic data");
+        options.addOption("u", "update", true, "update the pandemic data");
+        options.getOption("u").setArgName("filename");
         options.addOption("v", "version", false, "print version information");
         return options;
     }
