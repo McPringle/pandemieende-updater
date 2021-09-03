@@ -35,7 +35,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,10 +61,9 @@ public final class Updater {
         toJSON();
     }
 
-    private void toJSON() {
+    private void toJSON() throws IOException {
         final var lines = dataStore.values().stream()
                 .sorted()
-                .limit(5)
                 .map(Data::toJSON)
                 .collect(Collectors.joining(",\n"));
         final var history = Arrays.stream(lines.split("\n"))
@@ -76,7 +77,7 @@ public final class Updater {
                     %s
                   ]
                 }""".formatted(LocalDate.now(), history);
-        System.out.println(json);
+        Files.writeString(Paths.get("..", "pandemieende", "data.json"), json, StandardCharsets.UTF_8);
     }
 
     private void updateAdministeredVaccineDoses() throws IOException, CsvValidationException {
