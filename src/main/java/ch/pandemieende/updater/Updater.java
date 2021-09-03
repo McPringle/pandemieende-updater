@@ -38,8 +38,10 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.zip.ZipInputStream;
 
 public final class Updater {
@@ -53,16 +55,34 @@ public final class Updater {
 
     public void doUpdate() throws CsvValidationException, IOException {
         updateAdministeredVaccineDoses();
+        updateVaccinatedPersons();
+        toJSON();
+    }
 
-        dataStore.values().stream()
+    private void toJSON() {
+        final var lines = dataStore.values().stream()
                 .sorted()
-                .forEach(System.out::println);
+                .limit(5)
+                .map(Data::toJSON)
+                .collect(Collectors.joining(",\n"));
+        final var history = Arrays.stream(lines.split("\n"))
+                .map("    "::concat)
+                .collect(Collectors.joining("\n"))
+                .trim();
+        final var json = """
+                {
+                  "lastUpdate" : "%s",
+                  "history" : [
+                    %s
+                  ]
+                }""".formatted(LocalDate.now(), history);
+        System.out.println(json);
     }
 
     private void updateAdministeredVaccineDoses() throws IOException, CsvValidationException {
         final var file = extractFile("COVID19VaccDosesAdministered.csv");
         try (var reader = Files.newBufferedReader(file.toPath())) {
-            parseAdministeredVaccineDoses(reader).forEach(line -> {
+            parseData(reader).forEach(line -> {
                 final var statusDate = LocalDate.parse(line[0]);
                 final var administeredVaccineDoses = Integer.parseInt(line[4]);
                 final var data = getData(statusDate);
@@ -71,7 +91,23 @@ public final class Updater {
         }
     }
 
-    private ArrayList<String[]> parseAdministeredVaccineDoses(@NonNull final Reader reader) throws CsvValidationException, IOException {
+    private void updateVaccinatedPersons() throws IOException, CsvValidationException {
+        final var file = extractFile("COVID19VaccPersons_v2.csv");
+        try (var reader = Files.newBufferedReader(file.toPath())) {
+            parseData(reader).stream()
+                    .filter(line -> "COVID19FullyVaccPersons".equals(line[9]))
+                    .forEach(line -> {
+                final var statusDate = LocalDate.parse(line[0]);
+                final var vaccinatedPersons = Integer.parseInt(line[4]);
+                final var vaccinationRate = Double.parseDouble(line[7]);
+                final var data = getData(statusDate);
+                data.setVaccinatedPersons(vaccinatedPersons);
+                data.setVaccinationRate(vaccinationRate);
+            });
+        }
+    }
+
+    private ArrayList<String[]> parseData(@NonNull final Reader reader) throws CsvValidationException, IOException {
         final var list = new ArrayList<String[]>();
         try (var csvReader = new CSVReader(reader)) {
             for (var line = csvReader.readNext(); line != null; line = csvReader.readNext()) {

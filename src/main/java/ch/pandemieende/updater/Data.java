@@ -104,6 +104,16 @@ public final class Data implements Comparable<Data> {
                 + '}';
     }
 
+    public String toJSON() {
+        return """
+                {
+                  "statusDate" : "%s",
+                  "vaccinationRate" : %.2f,
+                  "vaccinatedPersons" : %d,
+                  "administeredVaccineDoses" : %d
+                }""".formatted(statusDate, vaccinationRate, vaccinatedPersons, administeredVaccineDoses);
+    }
+
     @Override
     public int compareTo(final Data data) {
         assert data != null;
