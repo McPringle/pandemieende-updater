@@ -72,26 +72,6 @@ task installGitHooks(type: Copy) {
     fileMode 0755
 }
 
-def test = tasks.named("test") {
-    useJUnitPlatform {
-        excludeTags "it", "nightly"
-    }
-}
-
-def it = tasks.register("it", Test) {
-    useJUnitPlatform {
-        includeTags "it"
-    }
-    shouldRunAfter test
-}
-
-def nightly = tasks.register("nightly", Test) {
-    useJUnitPlatform {
-        includeTags "nightly"
-    }
-    shouldRunAfter test
-}
-
 shadowJar {
     mergeServiceFiles()
     archiveBaseName.set('pandemieende-updater')
