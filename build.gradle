@@ -75,7 +75,7 @@ shadowJar {
 }
 
 spotbugs {
-    toolVersion = '4.2.0'
+    toolVersion = '4.4.1'
 }
 
 spotbugsMain {
