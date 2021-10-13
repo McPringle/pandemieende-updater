@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-@SuppressWarnings("java:S106")
+@SuppressWarnings({ "java:S106", "java:S4042" })
 public final class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
@@ -48,12 +48,27 @@ public final class Main {
         final var options = buildOptions();
         try {
             final var cmd = parseCommandLine(options, args);
+            if (cmd.hasOption("a")) {
+                System.out.println("Starting auto-update...");
+                final var downloadFile = new Downloader().download();
+                System.out.printf("  - BAG data downloaded to file: %s%n", downloadFile);
+                new Updater(downloadFile.toString()).doUpdate();
+                System.out.println("  - BAG data updated.");
+                if (!downloadFile.toFile().delete()) {
+                    System.err.printf("  - Deleting temporary download file failed: %s%n", downloadFile);
+                    System.exit(1);
+                } else {
+                    System.out.printf("  - Temporary file '%s' deleted.%n", downloadFile);
+                }
+                System.out.println("Done.");
+            }
             if (cmd.hasOption("d")) {
                 final var downloadFile = new Downloader().download();
                 System.out.printf("BAG data downloaded to file: %s%n", downloadFile);
             }
             if (cmd.hasOption("u")) {
                 new Updater(cmd.getOptionValue("u")).doUpdate();
+                System.out.println("BAG data updated.");
             }
             if (cmd.hasOption("h") || cmd.getOptions().length <= options.getRequiredOptions().size()) {
                 printHelp(options);
@@ -86,7 +101,8 @@ public final class Main {
 
     private static Options buildOptions() {
         final var options = new Options();
-        options.addOption("d", "download", false, "download pandemic data from BAG");
+        options.addOption("a", "auto", false, "download and update the pandemic data");
+        options.addOption("d", "download", false, "download the pandemic data");
         options.addOption("h", "help", false, "print this message");
         options.addOption("u", "update", true, "update the pandemic data");
         options.getOption("u").setArgName("filename");
