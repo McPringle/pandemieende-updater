@@ -48,8 +48,11 @@ import java.util.zip.ZipInputStream;
 
 public final class Updater {
 
-    private @NonNull final String zipFile;
-    private @NonNull final Map<LocalDate, Data> dataStore = new HashMap<>();
+    @NonNull
+    private final String zipFile;
+
+    @NonNull
+    private final Map<LocalDate, Data> dataStore = new HashMap<>();
 
     public Updater(@NonNull final String zipFile) {
         this.zipFile = zipFile;
