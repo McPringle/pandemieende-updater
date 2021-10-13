@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+@SuppressWarnings("java:S106")
 public final class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
@@ -47,6 +48,10 @@ public final class Main {
         final var options = buildOptions();
         try {
             final var cmd = parseCommandLine(options, args);
+            if (cmd.hasOption("d")) {
+                final var downloadFile = new Downloader().download();
+                System.out.printf("BAG data downloaded to file: %s%n", downloadFile);
+            }
             if (cmd.hasOption("u")) {
                 new Updater(cmd.getOptionValue("u")).doUpdate();
             }
@@ -81,6 +86,7 @@ public final class Main {
 
     private static Options buildOptions() {
         final var options = new Options();
+        options.addOption("d", "download", false, "download pandemic data from BAG");
         options.addOption("h", "help", false, "print this message");
         options.addOption("u", "update", true, "update the pandemic data");
         options.getOption("u").setArgName("filename");
