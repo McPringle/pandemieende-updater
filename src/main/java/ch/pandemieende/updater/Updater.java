@@ -100,6 +100,7 @@ public final class Updater {
         try (var reader = Files.newBufferedReader(file.toPath())) {
             parseData(reader).stream()
                     .filter(line -> "COVID19FullyVaccPersons".equals(line[9]))
+                    .filter(line -> "total_population".equals(line[12]))
                     .forEach(line -> {
                 final var statusDate = LocalDate.parse(line[0]);
                 final var vaccinatedPersons = Integer.parseInt(line[4]);
