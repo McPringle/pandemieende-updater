@@ -50,7 +50,7 @@ configurations {
 dependencies {
     compileOnly 'com.github.spotbugs:spotbugs-annotations:4.5.2'
     implementation 'org.slf4j:slf4j-api:1.7.32'
-    implementation 'ch.qos.logback:logback-classic:1.2.8'
+    implementation 'ch.qos.logback:logback-classic:1.2.10'
     implementation 'commons-cli:commons-cli:1.5.0'
     implementation 'com.opencsv:opencsv:5.5.2'
     testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.5.2'
