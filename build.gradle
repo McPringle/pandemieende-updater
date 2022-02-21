@@ -52,7 +52,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'ch.qos.logback:logback-classic:1.2.10'
     implementation 'commons-cli:commons-cli:1.5.0'
-    implementation 'com.opencsv:opencsv:5.5.2'
+    implementation 'com.opencsv:opencsv:5.6'
     testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.5.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
